@@ -1,4 +1,4 @@
-import Film from "../../components/film/film";
+import SmallFilmCard from "../../components/film/smallFilmCard";
 
 function MoviePage(): JSX.Element {
   return (
@@ -149,13 +149,13 @@ function MoviePage(): JSX.Element {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              <Film src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" name="Fantastic Beasts: The Crimes of Grindelwald"/>
+              <SmallFilmCard src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" name="Fantastic Beasts: The Crimes of Grindelwald"/>
 
-              <Film src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" name="Bohemian Rhapsody"/>
+              <SmallFilmCard src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" name="Bohemian Rhapsody"/>
 
-              <Film src="img/macbeth.jpg" alt="Macbeth" name="Macbeth"/>
+              <SmallFilmCard src="img/macbeth.jpg" alt="Macbeth" name="Macbeth"/>
 
-              <Film src="img/aviator.jpg" alt="Aviator" name="Aviator"/>
+              <SmallFilmCard src="img/aviator.jpg" alt="Aviator" name="Aviator"/>
             </div>
           </section>
 

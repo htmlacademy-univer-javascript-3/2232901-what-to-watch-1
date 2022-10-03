@@ -1,4 +1,4 @@
-function Film({src, alt, name}: {src: string, alt: string, name: string}): JSX.Element {
+function SmallFilmCard({src, alt, name}: {src: string, alt: string, name: string}): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -11,4 +11,4 @@ function Film({src, alt, name}: {src: string, alt: string, name: string}): JSX.E
   );
 }
 
-export default Film;
+export default SmallFilmCard;
