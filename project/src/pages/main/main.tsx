@@ -1,3 +1,5 @@
+import Film from "../../components/film/film";
+
 function Main(): JSX.Element {
   return (
     <html lang="en">
@@ -141,14 +143,16 @@ function Main(): JSX.Element {
             </ul>
     
             <div className="catalog__films-list">
-              <article className="small-film-card catalog__films-card">
+              {/* <article className="small-film-card catalog__films-card">
                 <div className="small-film-card__image">
                   <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
                 </div>
                 <h3 className="small-film-card__title">
                   <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
                 </h3>
-              </article>
+              </article> */}
+
+              <Film src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" name="Fantastic Beasts: The Crimes of Grindelwald"/>
     
               <article className="small-film-card catalog__films-card">
                 <div className="small-film-card__image">
@@ -350,4 +354,6 @@ function Main(): JSX.Element {
     </html>
   );
 }
+
+export default Main;
   

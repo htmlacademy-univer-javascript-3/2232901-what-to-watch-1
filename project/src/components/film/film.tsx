@@ -10,3 +10,5 @@ function Film({src, name}: {src: string, name: string}): JSX.Element {
         </article>
     );
 }
+
+export default Film;
