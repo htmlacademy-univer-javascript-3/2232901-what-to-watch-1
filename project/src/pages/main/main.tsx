@@ -1,4 +1,4 @@
-import SmallFilmCard from '../../components/film/smallFilmCard';
+import SmallFilmCard from '../../components/smallFilmCard/smallFilmCard';
 
 function Main({ promoTitle, promoGenre, promoYear }: { promoTitle: string, promoGenre: string, promoYear: string}): JSX.Element {
   return (
