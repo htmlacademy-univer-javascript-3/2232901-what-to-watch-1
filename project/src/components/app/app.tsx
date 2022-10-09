@@ -1,7 +1,14 @@
 import Main from '../../pages/main/main';
+import {PromoFilm} from '../../types/promo-film';
+import {FilmCardInfo} from '../../types/film-card-info';
 
-function App({ promoTitle, promoGenre, promoYear }: { promoTitle: string, promoGenre: string, promoYear: string}): JSX.Element {
-  return <Main promoTitle={promoTitle} promoGenre={promoGenre} promoYear={promoYear}/>;
+type AppProps = {
+  promoFilm: PromoFilm,
+  mainFilms: FilmCardInfo[]
+}
+
+function App({ promoFilm, mainFilms }: AppProps): JSX.Element {
+  return <Main promoFilm={ promoFilm } films={ mainFilms }/>;
 }
 
 export default App;

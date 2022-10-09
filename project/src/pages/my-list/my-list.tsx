@@ -1,6 +1,11 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
+import {FilmCardInfo} from '../../types/film-card-info';
 
-function MyList(): JSX.Element {
+type MyListProps = {
+  films: FilmCardInfo[]
+}
+
+function MyList({ films }: MyListProps): JSX.Element {
   return (
     <html lang="en">
       <head>
@@ -39,23 +44,7 @@ function MyList(): JSX.Element {
             <h2 className="catalog__title visually-hidden">Catalog</h2>
 
             <div className="catalog__films-list">
-              <SmallFilmCard src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" name="Fantastic Beasts: The Crimes of Grindelwald"/>
-
-              <SmallFilmCard src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" name="Bohemian Rhapsody"/>
-
-              <SmallFilmCard src="img/macbeth.jpg" alt="Macbeth" name="Macbeth"/>
-
-              <SmallFilmCard src="img/aviator.jpg" alt="Aviator" name="Aviator"/>
-
-              <SmallFilmCard src="img/we-need-to-talk-about-kevin.jpg" alt="We need to talk about Kevin" name="We need to talk about Kevin"/>
-
-              <SmallFilmCard src="img/what-we-do-in-the-shadows.jpg" alt="What We Do in the Shadows" name="What We Do in the Shadows"/>
-
-              <SmallFilmCard src="img/revenant.jpg" alt="Revenant" name="Revenant"/>
-
-              <SmallFilmCard src="img/johnny-english.jpg" alt="Johnny English" name="Johnny English"/>
-
-              <SmallFilmCard src="img/shutter-island.jpg" alt="Shutter Island" name="Shutter Island"/>
+              {films.map(fci => <SmallFilmCard src={fci.src} name={fci.name}/>)}
             </div>
           </section>
 
