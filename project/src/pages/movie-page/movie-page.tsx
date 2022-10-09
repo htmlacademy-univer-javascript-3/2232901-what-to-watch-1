@@ -1,4 +1,4 @@
-import SmallFilmCard from "../../components/smallFilmCard/smallFilmCard";
+import SmallFilmCard from "../../components/small-film-card/small-film-card";
 
 function MoviePage(): JSX.Element {
   return (
