@@ -1,10 +1,10 @@
 import {FilmCardInfo} from '../../types/film-card-info';
 
-type filmCardInfo = {
+type SmallFilmCardProps = {
   filmCardInfo: FilmCardInfo
 }
 
-function SmallFilmCard(filmCardInfo: FilmCardInfo): JSX.Element {
+function SmallFilmCard({ filmCardInfo }: SmallFilmCardProps): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">

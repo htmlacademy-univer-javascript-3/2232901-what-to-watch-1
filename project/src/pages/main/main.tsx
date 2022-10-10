@@ -118,7 +118,7 @@ function Main({ promoFilm, films }: MainProps): JSX.Element {
             </ul>
 
             <div className="catalog__films-list">
-              {films.map(fci => <SmallFilmCard src={fci.src} name={fci.name}/>)}
+              {films.map((fci) => <SmallFilmCard filmCardInfo={fci} key={fci.name}/>)}
             </div>
 
             <div className="catalog__more">

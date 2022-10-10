@@ -122,7 +122,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__films-list">
-              {films.map(fci => <SmallFilmCard src={fci.src} name={fci.name}/>)}
+              {films.map(fci => <SmallFilmCard filmCardInfo={fci} key={fci.name}/>)}
             </div>
           </section>
 

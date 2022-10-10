@@ -79,6 +79,6 @@ export const mainFilms: FilmCardInfo[] = [
   },
   {
     name: 'Midnight Special',
-    src: 'img/midnight-special.jpg',
+    src: 'img/midnight-special.jpg'
   }
-]
+];

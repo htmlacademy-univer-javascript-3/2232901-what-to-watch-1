@@ -6,4 +6,4 @@ export const promoFilm: PromoFilm = {
   promoYear: 2014,
   backGroundSrc: 'img/bg-the-grand-budapest-hotel.jpg',
   posterSrc: 'img/the-grand-budapest-hotel-poster.jpg'
-}
+};
