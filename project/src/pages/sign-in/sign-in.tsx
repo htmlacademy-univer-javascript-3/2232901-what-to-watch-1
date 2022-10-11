@@ -57,7 +57,7 @@ function SignIn(): JSX.Element {
         </div>
       </body>
     </html>
-    );
+  );
 }
 
 export default SignIn;
