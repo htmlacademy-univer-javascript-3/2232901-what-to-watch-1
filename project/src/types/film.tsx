@@ -1,4 +1,4 @@
-export type FilmCardInfo = {
+export type Film = {
   src: string,
   name: string
 }

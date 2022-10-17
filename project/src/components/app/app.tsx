@@ -1,9 +1,8 @@
 import {PromoFilm} from '../../types/promo-film';
-import {FilmCardInfo} from '../../types/film-card-info';
+import {Film} from '../../types/film';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
-import HeadGuest from '../../pages/head-guest/head-guest';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
@@ -13,7 +12,7 @@ import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   promoFilm: PromoFilm,
-  mainFilms: FilmCardInfo[]
+  mainFilms: Film[]
 }
 
 function App({ promoFilm, mainFilms }: AppProps): JSX.Element {
@@ -26,7 +25,6 @@ function App({ promoFilm, mainFilms }: AppProps): JSX.Element {
             <Route path='review' element={<AddReview />} />
           </Route>
           <Route path='player/:id' element={<Player />} />
-          <Route path='head-guest' element={<HeadGuest />} />
           <Route path='mylist' element={
             <PrivateRoute hasAccess={false}>
               <MyList films={ mainFilms.slice(0,9) }/>

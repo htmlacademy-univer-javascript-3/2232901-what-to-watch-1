@@ -1,6 +1,6 @@
-import {FilmCardInfo} from '../types/film-card-info';
+import {Film} from '../types/film';
 
-export const mainFilms: FilmCardInfo[] = [
+export const mainFilms: Film[] = [
   {
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
     src: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
