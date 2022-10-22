@@ -1,8 +1,8 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
-import {Film} from '../../types/film';
+
 import FilmsList from '../../components/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
+import {Film} from '../../types/film';
 
 type MyListProps = {
   films: Film[]
