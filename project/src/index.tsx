@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import {promoFilm} from './mocks/promo-film';
+import {mainFilms} from './mocks/main-films';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -8,6 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App promoTitle={'The Grand Budapest Hotel'} promoGenre={'Drama'} promoYear={'2014'}/>
+    <App promoFilm={promoFilm} mainFilms={ mainFilms }/>
   </React.StrictMode>,
 );
