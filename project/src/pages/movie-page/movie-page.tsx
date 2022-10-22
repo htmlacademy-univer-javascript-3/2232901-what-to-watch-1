@@ -1,5 +1,8 @@
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import {Film} from '../../types/film';
+import Logo from '../../components/logo/logo';
+import {Link} from 'react-router-dom';
+import Footer from '../../components/footer/footer';
 
 type MoviePageProps = {
   films: Film[]
@@ -17,13 +20,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
+            <Logo/>
 
             <ul className="user-block">
               <li className="user-block__item">
@@ -59,7 +56,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to='review' className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -117,19 +114,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </>
   );

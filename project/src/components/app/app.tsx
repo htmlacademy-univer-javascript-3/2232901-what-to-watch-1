@@ -12,22 +12,22 @@ import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
   promoFilm: PromoFilm,
-  mainFilms: Film[]
+  films: Film[]
 }
 
-function App({ promoFilm, mainFilms }: AppProps): JSX.Element {
+function App({ promoFilm, films }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
-          <Route index element={<Main promoFilm={ promoFilm } films={ mainFilms }/>} />
-          <Route path='films/:id' element={<MoviePage films={ mainFilms.slice(0, 4) }/>}>
-            <Route path='review' element={<AddReview />} />
+          <Route index element={<Main promoFilm={ promoFilm } films={ films }/>} />
+          <Route path='films/:id' element={<MoviePage films={ films.slice(0, 4) }/>}>
+            <Route path='review' element={<AddReview films={ films }/>} />
           </Route>
-          <Route path='player/:id' element={<Player />} />
+          <Route path='player/:id' element={<Player films={ films }/>} />
           <Route path='mylist' element={
             <PrivateRoute hasAccess={false}>
-              <MyList films={ mainFilms.slice(0,9) }/>
+              <MyList films={ films }/>
             </PrivateRoute>
           }
           />

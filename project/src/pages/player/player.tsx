@@ -1,7 +1,22 @@
-function Player(): JSX.Element {
+import {Film} from '../../types/film';
+import {Navigate, useParams} from 'react-router-dom';
+
+type PlayerProps ={
+  films: Film[];
+};
+
+function Player({films}: PlayerProps): JSX.Element{
+
+  const id = Number(useParams().id);
+  const film = films.find((currentFilm) => currentFilm.id === id);
+
+  if (!film) {
+    return <Navigate to={'/*'} />;
+  }
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={film.videoSrc} className="player__video" poster={film.src}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -11,7 +26,7 @@ function Player(): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{film.duration}</div>
         </div>
 
         <div className="player__controls-row">
