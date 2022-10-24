@@ -1,8 +1,8 @@
-import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 import Footer from '../../components/footer/footer';
+import FilmsList from '../../components/films-list/films-list';
 
 type MoviePageProps = {
   films: Film[]
@@ -110,7 +110,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {films.map((film) => <SmallFilmCard film={film} key={film.name}/>)}
+            <FilmsList films={films} />
           </div>
         </section>
 

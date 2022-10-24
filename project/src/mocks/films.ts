@@ -6,7 +6,7 @@ export const films: Film[] = [
     name: 'Fantastic Beasts: The Crimes of Grindelwald',
     src: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
     backGroundSrc: 'https://www.laweekly.com/wp-content/uploads/2019/05/fantasticbeasts-2-courtesyofwarnerbros.jpg',
-    videoSrc: 'https://yandex.ru/video/preview/?filmId=676626154373651054&text=фантастические+твари+и+где+они+обитают&where=all',
+    videoSrc: 'https://10.react.pages.academy/static/film/video/bubbles.mp4',
     duration: '2:13:50'
   },
   {

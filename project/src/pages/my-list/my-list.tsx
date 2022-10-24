@@ -1,5 +1,5 @@
 
-import FilmsList from '../../components/films-list';
+import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import {Film} from '../../types/film';
