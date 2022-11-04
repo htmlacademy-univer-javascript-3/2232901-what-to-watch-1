@@ -4,7 +4,7 @@ type ReviewProps = {
   review: Review
 }
 
-function ReviewForm({review}: ReviewProps){
+function ReviewComp({review}: ReviewProps){
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -21,4 +21,4 @@ function ReviewForm({review}: ReviewProps){
   );
 }
 
-export default ReviewForm;
+export default ReviewComp;
