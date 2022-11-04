@@ -1,11 +1,10 @@
-import {PromoFilm} from '../../types/promo-film';
 import {Film} from '../../types/film';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 
 type MainProps = {
-  promoFilm: PromoFilm
+  promoFilm: Film
   films: Film[]
 }
 
@@ -37,14 +36,14 @@ function Main({ promoFilm, films }: MainProps): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.posterSrc} alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm.src} alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.promoTitle}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.promoGenre}</span>
-                <span className="film-card__year">{promoFilm.promoYear}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.releaseYear}</span>
               </p>
 
               <div className="film-card__buttons">

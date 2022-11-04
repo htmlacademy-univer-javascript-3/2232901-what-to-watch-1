@@ -1,4 +1,3 @@
-import {PromoFilm} from '../../types/promo-film';
 import {Film} from '../../types/film';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from '../../pages/main/main';
@@ -11,7 +10,7 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  promoFilm: PromoFilm,
+  promoFilm: Film,
   films: Film[]
 }
 
@@ -21,7 +20,7 @@ function App({ promoFilm, films }: AppProps): JSX.Element {
       <Routes>
         <Route path='/'>
           <Route index element={<Main promoFilm={ promoFilm } films={ films }/>} />
-          <Route path='films/:id' element={<MoviePage films={ films.slice(0, 4) }/>}>
+          <Route path='films/:id' element={<MoviePage films={films}/>}>
             <Route path='review' element={<AddReview films={ films }/>} />
           </Route>
           <Route path='player/:id' element={<Player films={ films }/>} />
