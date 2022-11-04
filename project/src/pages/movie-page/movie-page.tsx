@@ -14,7 +14,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
   const film = films.find((currentFilm) => currentFilm.id === id);
 
   if (!film) {
-    return <Navigate to={'/*'}/>;
+    return <Navigate to={'/not-found'}/>;
   }
 
   return (
