@@ -15,18 +15,18 @@ function AddReviewForm() {
     <form action="#" className="add-review__form">
       <div className="rating" >
         <div className="rating__stars">
-          {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((rating) => (
-            <Fragment key={rating}>
+          {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((starNumber) => (
+            <Fragment key={starNumber}>
               <input
                 className="rating__input"
-                id={`star-${rating}`}
+                id={`star-${starNumber}`}
                 type="radio"
                 name="rating"
-                value={rating.toString()}
+                value={starNumber.toString()}
                 onChange={ratingChangeHandler}
               />
-              <label className="rating__label" htmlFor={`star-${rating}`}>
-                Rating {rating}
+              <label className="rating__label" htmlFor={`star-${starNumber}`}>
+                Rating {starNumber}
               </label>
             </Fragment>
           ))}
