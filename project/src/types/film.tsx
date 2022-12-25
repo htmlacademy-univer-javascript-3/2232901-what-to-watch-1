@@ -2,7 +2,7 @@ import {Review} from './review';
 
 export type Film = {
   id: number,
-  genre: string,
+  genre: string
   releaseYear: number,
   ratingScore: number,
   ratingCount: number
