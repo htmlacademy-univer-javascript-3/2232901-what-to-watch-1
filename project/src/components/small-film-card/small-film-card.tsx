@@ -22,7 +22,7 @@ function SmallFilmCard({ film, isMouseOn, onMouseOverHandler, onMouseLeaveHandle
         }
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`films/${film.id}`}>{film.name}</Link>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
       </h3>
     </article>
   );

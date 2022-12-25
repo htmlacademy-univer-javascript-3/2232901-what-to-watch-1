@@ -10,23 +10,22 @@ import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  promoFilm: Film,
-  films: Film[]
+  promoFilm: Film
 }
 
-function App({ promoFilm, films }: AppProps): JSX.Element {
+function App({ promoFilm }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
-          <Route index element={<Main promoFilm={ promoFilm } films={ films }/>} />
-          <Route path='films/:id' element={<MoviePage films={films}/>}>
-            <Route path='review' element={<AddReview films={ films }/>} />
+          <Route index element={<Main promoFilm={ promoFilm }/>} />
+          <Route path='films/:id' element={<MoviePage />}>
+            <Route path='review' element={<AddReview />} />
           </Route>
-          <Route path='player/:id' element={<Player films={ films }/>} />
+          <Route path='player/:id' element={<Player />} />
           <Route path='mylist' element={
             <PrivateRoute hasAccess={false}>
-              <MyList films={ films }/>
+              <MyList />
             </PrivateRoute>
           }
           />

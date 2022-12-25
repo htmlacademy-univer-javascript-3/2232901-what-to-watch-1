@@ -1,15 +1,12 @@
-import {Film} from '../../types/film';
 import Logo from '../../components/logo/logo';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
+import {useAppSelector} from '../../hooks';
 
-type MoviePageProps = {
-  films: Film[]
-}
-
-function MoviePage({ films }: MoviePageProps): JSX.Element {
+function MoviePage(): JSX.Element {
+  const films = useAppSelector((state) => state.shownFilms)
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
 
@@ -88,7 +85,7 @@ function MoviePage({ films }: MoviePageProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList films={films.slice(0, 4)} />
+            <FilmsList />
           </div>
         </section>
 
