@@ -1,13 +1,10 @@
-import {Film} from '../../types/film';
 import {Link, Navigate, useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+import {useAppSelector} from '../../hooks';
 
-type AddReviewProps = {
-  films: Film[]
-}
-
-function AddReview({films}: AddReviewProps): JSX.Element {
+function AddReview(): JSX.Element {
+  const films = useAppSelector((state) => state.allFilms);
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
 
