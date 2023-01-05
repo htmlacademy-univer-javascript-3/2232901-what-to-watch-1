@@ -3,12 +3,17 @@ import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
+import {useAppSelector} from '../../hooks';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 
 type MainProps = {
   promoFilm: Film
 }
 
 function Main({ promoFilm }: MainProps): JSX.Element {
+  const filmsCount = useAppSelector((state) => state.filmCardsCount);
+  const shownFilmsCount = useAppSelector((state) => state.shownFilms).length;
+  const films = useAppSelector((state) => state.shownFilms).slice(0, filmsCount);
 
   return (
     <>
@@ -72,11 +77,11 @@ function Main({ promoFilm }: MainProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList />
-          <FilmsList />
+          <FilmsList films={films}/>
+          {
+            shownFilmsCount !== filmsCount && <ShowMoreButton />
+          }
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer/>

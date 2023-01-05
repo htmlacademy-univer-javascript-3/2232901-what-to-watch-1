@@ -1,9 +1,12 @@
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
+import {useAppSelector} from '../../hooks';
 
 
 function MyList(): JSX.Element {
+  const films = useAppSelector((state) => state.shownFilms);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -24,7 +27,7 @@ function MyList(): JSX.Element {
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmsList />
+        <FilmsList films={films}/>
       </section>
 
       <Footer/>
