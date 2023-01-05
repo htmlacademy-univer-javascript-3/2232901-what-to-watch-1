@@ -1,9 +1,12 @@
 import SmallFilmCard from '../small-film-card/small-film-card';
 import {useState} from 'react';
-import {useAppSelector} from '../../hooks';
+import {Film} from '../../types/film';
 
-function FilmsList(){
-  const films = useAppSelector((state) => state.shownFilms);
+type FilmsListProps = {
+  films: Film[]
+}
+
+function FilmsList({films}: FilmsListProps){
   const [activeCard, setActiveCard] = useState(-1);
 
   const changeActiveCard = (filmId: number) => {

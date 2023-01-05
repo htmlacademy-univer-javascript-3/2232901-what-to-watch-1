@@ -6,7 +6,7 @@ import {changeGenre, setFilmsByGenre} from '../../store/action';
 
 
 function GenresList(): JSX.Element {
-  const [currentGenre, setCurrentGenre] = useState(ANY_GENRE);
+  const [currentGenre, setCurrentGenre] = useState(useAppSelector((state) => state.currentGenre));
 
   const dispatch = useAppDispatch();
 

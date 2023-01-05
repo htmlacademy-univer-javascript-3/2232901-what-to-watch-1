@@ -6,7 +6,7 @@ import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
 import {useAppSelector} from '../../hooks';
 
 function MoviePage(): JSX.Element {
-  const films = useAppSelector((state) => state.shownFilms)
+  const films = useAppSelector((state) => state.shownFilms);
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
 
@@ -85,7 +85,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList />
+            <FilmsList films={films}/>
           </div>
         </section>
 
