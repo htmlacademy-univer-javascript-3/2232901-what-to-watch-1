@@ -2,7 +2,7 @@ import {Navigate, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 
 function Player(): JSX.Element{
-  const films = useAppSelector((state) => state.shownFilms)
+  const films = useAppSelector((state) => state.shownFilms);
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
 
@@ -12,7 +12,7 @@ function Player(): JSX.Element{
 
   return (
     <div className="player">
-      <video src={film.videoSrc} className="player__video" poster={film.src}></video>
+      <video src={film.videoLink} className="player__video" poster={film.posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -22,7 +22,7 @@ function Player(): JSX.Element{
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">{film.duration}</div>
+          <div className="player__time-value">{film.runTime}</div>
         </div>
 
         <div className="player__controls-row">

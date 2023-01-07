@@ -16,8 +16,8 @@ function SmallFilmCard({ film, isMouseOn, onMouseOverHandler, onMouseLeaveHandle
       <div className="small-film-card__image">
         {
           isMouseOn
-            ? <PreviewPlayer posterUrl={film.src} videoUrl={film.videoSrc} />
-            : <img src={film.src} alt={film.name} width="280" height="175" />
+            ? <PreviewPlayer posterUrl={film.previewImage} videoUrl={film.previewVideoLink} />
+            : <img src={film.previewImage} alt={film.name} width="280" height="175" />
 
         }
       </div>

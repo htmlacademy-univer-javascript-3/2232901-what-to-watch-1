@@ -1,4 +1,3 @@
-import {Film} from '../../types/film';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
@@ -9,16 +8,12 @@ import SignIn from '../../pages/sign-in/sign-in';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
-  promoFilm: Film
-}
-
-function App({ promoFilm }: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/'>
-          <Route index element={<Main promoFilm={ promoFilm }/>} />
+          <Route index element={<Main />} />
           <Route path='films/:id' element={<MoviePage />}>
             <Route path='review' element={<AddReview />} />
           </Route>

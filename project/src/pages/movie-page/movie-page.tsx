@@ -3,12 +3,20 @@ import {Link, Navigate, useParams} from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import FilmsList from '../../components/films-list/films-list';
 import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchFilmReviews} from '../../store/api-actions';
 
 function MoviePage(): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const films = useAppSelector((state) => state.shownFilms);
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
+
+  useEffect(() => {
+    dispatch(fetchFilmReviews(id));
+  }, [id]);
 
   if (!film) {
     return <Navigate to={'/not-found'}/>;
@@ -19,7 +27,7 @@ function MoviePage(): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.backGroundSrc} alt={film.name} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -44,7 +52,7 @@ function MoviePage(): JSX.Element {
               <h2 className="film-card__title">{film.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{film.genre}</span>
-                <span className="film-card__year">{film.releaseYear}</span>
+                <span className="film-card__year">{film.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -70,7 +78,7 @@ function MoviePage(): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.src} alt={film.name} width="218" height="327" />
+              <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">

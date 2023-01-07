@@ -1,15 +1,33 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {MockFilms} from '../mocks/mockFilms';
 import {ANY_GENRE} from '../types/any-genre';
-import {changeGenre, increaseFilmCardsCount, resetFilmCardsCount, setFilmsByGenre} from './action';
-import {Film} from '../types/film';
+import {
+  changeGenre,
+  increaseFilmCardsCount,
+  resetFilmCardsCount,
+  filterFilmsByGenre,
+  setFilms,
+  setPromoFilm, setFilmReviews
+} from './action';
+import {EMPTY_FILM, Film} from '../types/film';
 import {cardsPerStepCount} from './consts';
+import {Review} from '../types/review';
 
-const initialState = {
-  allFilms: MockFilms,
+type InitialState = {
+  allFilms: Film[],
+  currentGenre: string,
+  shownFilms: Film[],
+  filmCardsCount: number,
+  promoFilm: Film,
+  currentFilmReviews: Review[]
+};
+
+const initialState : InitialState = {
+  allFilms: [],
   currentGenre: ANY_GENRE,
-  shownFilms: MockFilms,
-  filmCardsCount: cardsPerStepCount
+  shownFilms: [],
+  filmCardsCount: cardsPerStepCount,
+  promoFilm: EMPTY_FILM,
+  currentFilmReviews: []
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -17,7 +35,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeGenre, (state, action) => {
       state.currentGenre = action.payload.currentGenre;
     })
-    .addCase(setFilmsByGenre, (state, action) => {
+    .addCase(filterFilmsByGenre, (state, action) => {
       state.shownFilms = sortFilmsByGenre(state.allFilms, state.currentGenre);
       state.filmCardsCount = Math.min(state.shownFilms.length, cardsPerStepCount);
     })
@@ -26,6 +44,16 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetFilmCardsCount, (state, action) => {
       state.filmCardsCount = Math.min(state.shownFilms.length, cardsPerStepCount);
+    })
+    .addCase(setFilms, (state, action) => {
+      state.allFilms = action.payload.films;
+      state.shownFilms = action.payload.films;
+    })
+    .addCase(setPromoFilm, (state, action) => {
+      state.promoFilm = action.payload.promoFilm;
+    })
+    .addCase(setFilmReviews, (state, action) => {
+      state.currentFilmReviews = action.payload.reviews;
     });
 });
 
