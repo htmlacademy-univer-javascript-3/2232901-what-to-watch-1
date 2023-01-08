@@ -2,41 +2,68 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
 import {Film} from '../types/film';
-import {setFilmReviews, setFilms, setPromoFilm} from './action';
 import {Review} from '../types/review';
 
-export const fetchFilms = createAsyncThunk<void, undefined, {
+export const fetchFilms = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'fetchFilms',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Film[]>('/films');
-    dispatch(setFilms({films: data}));
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Film[]>('films');
+    return data;
   },
 );
 
-export const fetchPromoFilm = createAsyncThunk<void, undefined, {
+export const fetchFilmById = createAsyncThunk<Film, number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'fetchFilmById',
+  async (filmId: number, {extra: api}) => {
+    const {data} = await api.get<Film>(`films/${filmId}`);
+
+    return data;
+  },
+);
+
+export const fetchPromoFilm = createAsyncThunk<Film, undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
   'fetchPromoFilm',
-  async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Film>('/promo');
-    dispatch(setPromoFilm({promoFilm: data}));
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Film>('promo');
+
+    return data;
   },
 );
 
-export const fetchFilmReviews = createAsyncThunk<void, number, {
+export const fetchReviewsById = createAsyncThunk<Review[], number, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }>(
-  'fetchPromoFilm',
-  async (filmId, {dispatch, extra: api}) => {
-    const {data} = await api.get<Review[]>(`/comments/${filmId}`);
-    dispatch(setFilmReviews({reviews: data}));
+  'fetchReviewsById',
+  async (filmId: number, { extra: api}) => {
+    const {data} = await api.get<Review[]>(`comments/${filmId}`);
+
+    return data;
+  },
+);
+
+export const fetchSimilarFilmsById = createAsyncThunk<Film[], number, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'fetchSimilarFilmsById',
+  async (filmId: number, { extra: api}) => {
+    const {data} = await api.get<Film[]>(`films/${filmId}/similar`);
+
+    return data;
   },
 );

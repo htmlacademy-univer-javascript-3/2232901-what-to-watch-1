@@ -2,7 +2,7 @@ import {Navigate, useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 
 function Player(): JSX.Element{
-  const films = useAppSelector((state) => state.shownFilms);
+  const films = useAppSelector((state) => state.filteredFilms);
   const id = Number(useParams().id);
   const film = films.find((currentFilm) => currentFilm.id === id);
 

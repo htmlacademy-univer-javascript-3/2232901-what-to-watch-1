@@ -4,30 +4,35 @@ import {
   changeGenre,
   increaseFilmCardsCount,
   resetFilmCardsCount,
-  filterFilmsByGenre,
-  setFilms,
-  setPromoFilm, setFilmReviews
+  filterFilmsByGenre
 } from './action';
 import {EMPTY_FILM, Film} from '../types/film';
 import {cardsPerStepCount} from './consts';
 import {Review} from '../types/review';
+import {fetchFilmById, fetchFilms, fetchPromoFilm, fetchReviewsById, fetchSimilarFilmsById} from './api-actions';
 
 type InitialState = {
   allFilms: Film[],
   currentGenre: string,
-  shownFilms: Film[],
+  filteredFilms: Film[],
   filmCardsCount: number,
   promoFilm: Film,
-  currentFilmReviews: Review[]
+  currentFilm: Film,
+  currentFilmReviews: Review[],
+  currentFilmSimilarFilms: Film[],
+  isLoading: boolean
 };
 
 const initialState : InitialState = {
   allFilms: [],
   currentGenre: ANY_GENRE,
-  shownFilms: [],
+  filteredFilms: [],
   filmCardsCount: cardsPerStepCount,
   promoFilm: EMPTY_FILM,
-  currentFilmReviews: []
+  currentFilm: EMPTY_FILM,
+  currentFilmReviews: [],
+  currentFilmSimilarFilms: [],
+  isLoading: true
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -36,28 +41,57 @@ export const reducer = createReducer(initialState, (builder) => {
       state.currentGenre = action.payload.currentGenre;
     })
     .addCase(filterFilmsByGenre, (state, action) => {
-      state.shownFilms = sortFilmsByGenre(state.allFilms, state.currentGenre);
-      state.filmCardsCount = Math.min(state.shownFilms.length, cardsPerStepCount);
+      state.filteredFilms = getFilmsByGenre(state.allFilms, state.currentGenre);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
     })
     .addCase(increaseFilmCardsCount, (state, action) => {
-      state.filmCardsCount = Math.min(state.shownFilms.length, state.filmCardsCount + cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, state.filmCardsCount + cardsPerStepCount);
     })
     .addCase(resetFilmCardsCount, (state, action) => {
-      state.filmCardsCount = Math.min(state.shownFilms.length, cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
     })
-    .addCase(setFilms, (state, action) => {
-      state.allFilms = action.payload.films;
-      state.shownFilms = action.payload.films;
+    .addCase(fetchFilms.pending, (state) =>{
+      state.isLoading = true;
     })
-    .addCase(setPromoFilm, (state, action) => {
-      state.promoFilm = action.payload.promoFilm;
+    .addCase(fetchFilms.fulfilled, (state, action) =>{
+      const films = action.payload;
+
+      state.allFilms = films;
+      state.filteredFilms = films;
+      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
+      state.isLoading = false;
     })
-    .addCase(setFilmReviews, (state, action) => {
-      state.currentFilmReviews = action.payload.reviews;
+    .addCase(fetchPromoFilm.pending, (state) =>{
+      state.isLoading = true;
+    })
+    .addCase(fetchPromoFilm.fulfilled, (state, action) =>{
+      state.promoFilm = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(fetchReviewsById.pending, (state) =>{
+      state.isLoading = true;
+    })
+    .addCase(fetchReviewsById.fulfilled, (state, action) =>{
+      state.currentFilmReviews = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(fetchFilmById.pending, (state) =>{
+      state.isLoading = true;
+    })
+    .addCase(fetchFilmById.fulfilled, (state, action) =>{
+      state.currentFilm = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(fetchSimilarFilmsById.pending, (state) =>{
+      state.isLoading = true;
+    })
+    .addCase(fetchSimilarFilmsById.fulfilled, (state, action) =>{
+      state.currentFilmSimilarFilms = action.payload;
+      state.isLoading = false;
     });
 });
 
-const sortFilmsByGenre = (films: Film[], genre: string) => {
+const getFilmsByGenre = (films: Film[], genre: string) => {
   if(genre === ANY_GENRE) {
     return films;
   }

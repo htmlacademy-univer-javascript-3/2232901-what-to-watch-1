@@ -5,7 +5,7 @@ import {useAppSelector} from '../../hooks';
 
 
 function MyList(): JSX.Element {
-  const films = useAppSelector((state) => state.shownFilms);
+  const films = useAppSelector((state) => state.filteredFilms);
 
   return (
     <div className="user-page">

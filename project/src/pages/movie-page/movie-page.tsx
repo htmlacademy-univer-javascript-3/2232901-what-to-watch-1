@@ -5,21 +5,31 @@ import FilmsList from '../../components/films-list/films-list';
 import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
-import {fetchFilmReviews} from '../../store/api-actions';
+import {fetchFilmById, fetchReviewsById, fetchSimilarFilmsById} from '../../store/api-actions';
+import Loading from '../../components/loading/loading';
 
 function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const films = useAppSelector((state) => state.shownFilms);
   const id = Number(useParams().id);
-  const film = films.find((currentFilm) => currentFilm.id === id);
 
   useEffect(() => {
-    dispatch(fetchFilmReviews(id));
-  }, [id]);
+    dispatch(fetchFilmById(id));
+    dispatch(fetchReviewsById(id));
+    dispatch(fetchSimilarFilmsById(id));
+  }, [id, dispatch]);
+
+  const film = useAppSelector((state) => state.currentFilm);
+  const similarFilms = useAppSelector((state) => state.currentFilmSimilarFilms);
+  const isLoading = useAppSelector((state) => state.isLoading);
 
   if (!film) {
     return <Navigate to={'/not-found'}/>;
+  }
+
+  if (isLoading) {
+    return (
+      <Loading />
+    );
   }
 
   return (
@@ -93,7 +103,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList films={films}/>
+            <FilmsList films={similarFilms}/>
           </div>
         </section>
 

@@ -2,14 +2,31 @@ import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genres-list/genres-list';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import Loading from '../../components/loading/loading';
+import {useEffect} from 'react';
+import {fetchFilms, fetchPromoFilm} from '../../store/api-actions';
 
 function Main(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFilms());
+    dispatch(fetchPromoFilm());
+  }, [dispatch]);
+
   const filmsCount = useAppSelector((state) => state.filmCardsCount);
-  const shownFilmsCount = useAppSelector((state) => state.shownFilms).length;
-  const films = useAppSelector((state) => state.shownFilms).slice(0, filmsCount);
+  const shownFilmsCount = useAppSelector((state) => state.filteredFilms).length;
+  const films = useAppSelector((state) => state.filteredFilms).slice(0, filmsCount);
   const promoFilm = useAppSelector((state) => state.promoFilm);
+
+  const isLoading = useAppSelector((state) => state.isLoading);
+  if (isLoading) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <>
