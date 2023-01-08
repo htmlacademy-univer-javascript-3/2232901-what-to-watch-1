@@ -2,7 +2,7 @@ import {ANY_GENRE} from '../../types/any-genre';
 import {MouseEvent, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {Film} from '../../types/film';
-import {changeGenre, setFilmsByGenre} from '../../store/action';
+import {changeGenre, filterFilmsByGenre} from '../../store/action';
 
 
 function GenresList(): JSX.Element {
@@ -16,7 +16,7 @@ function GenresList(): JSX.Element {
   const handleChangeGenreClick = (evt: MouseEvent<HTMLAnchorElement>, genre: string) => {
     evt.preventDefault();
     dispatch(changeGenre({currentGenre: genre}));
-    dispatch(setFilmsByGenre());
+    dispatch(filterFilmsByGenre());
     setCurrentGenre(genre);
   };
 

@@ -1,15 +1,13 @@
-import {Review} from '../../types/review';
 import ReviewComp from '../review-comp/review-comp';
+import {useAppSelector} from '../../hooks';
 
-type ReviewTabProps = {
-  reviews: Review[]
-}
+function ReviewsTab(){
+  const reviews = useAppSelector((state) => state.currentFilmReviews);
 
-function ReviewsTab({reviews}: ReviewTabProps){
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.map((review) => ReviewComp({review}))}
+        {reviews.map((review) => <ReviewComp key={review.id} review={review} />)}
       </div>
     </div>
   );
