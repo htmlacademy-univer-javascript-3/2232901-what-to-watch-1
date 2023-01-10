@@ -2,6 +2,7 @@ import {Link, Navigate, useParams} from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import {useAppSelector} from '../../hooks';
+import UserBlock from '../../components/user-block/user-block';
 
 function AddReview(): JSX.Element {
   const films = useAppSelector((state) => state.allFilms);
@@ -16,7 +17,7 @@ function AddReview(): JSX.Element {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.backGroundSrc} alt={film.name} />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -35,20 +36,11 @@ function AddReview(): JSX.Element {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to={'login'} className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={film.src} alt={film.name} width="218" height="327" />
+          <img src={film.posterImage} alt={film.name} width="218" height="327" />
         </div>
       </div>
 

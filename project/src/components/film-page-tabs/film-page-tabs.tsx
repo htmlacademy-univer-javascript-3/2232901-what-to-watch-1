@@ -68,7 +68,7 @@ function FilmPageTabs({ film } : filmPageTabsProps){
 
       {tab === Tab.Overview && <OverviewTab film={film} />}
       {tab === Tab.Details && <DetailsTab film={film} />}
-      {tab === Tab.Reviews && <ReviewsTab reviews={film.reviews} />}
+      {tab === Tab.Reviews && <ReviewsTab />}
     </div>
   );
 }

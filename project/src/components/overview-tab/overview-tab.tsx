@@ -8,10 +8,10 @@ function OverviewTab({ film }: OverviewTabProps){
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film.ratingScore}</div>
+        <div className="film-rating__score">{film.rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getRatingLevel(film.ratingScore)}</span>
-          <span className="film-rating__count">{film.ratingCount} ratings</span>
+          <span className="film-rating__level">{getRatingLevel(film.rating)}</span>
+          <span className="film-rating__count">{film.rating} ratings</span>
         </p>
       </div>
 
