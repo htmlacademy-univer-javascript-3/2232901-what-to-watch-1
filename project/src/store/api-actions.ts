@@ -3,6 +3,8 @@ import {AppDispatch, State} from '../types/state';
 import {AxiosInstance} from 'axios';
 import {Film} from '../types/film';
 import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
+import {AuthData} from '../types/auth-data';
 
 export const fetchFilms = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
@@ -67,3 +69,52 @@ export const fetchSimilarFilmsById = createAsyncThunk<Film[], number, {
     return data;
   },
 );
+
+export const login = createAsyncThunk<UserData, AuthData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>('login',
+  async ({ email, password }, { extra: api }) => {
+    const {data} = await api.post<UserData>('login', {
+      email,
+      password,
+    });
+    return data;
+  },
+);
+
+export const checkAuth = createAsyncThunk<UserData, undefined, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>('checkAuth',
+  async (_arg, {extra: api}) => {
+    const { data } = await api.get('login');
+
+    return data;
+  },
+);
+
+export const logout = createAsyncThunk<void, undefined, {
+  state: State,
+  extra: AxiosInstance
+}>('logout',
+  async (_arg, { dispatch, extra: api }) => {
+    await api.delete('logout');
+  },
+);
+
+export const changeFilmViewStatus = createAsyncThunk<Film, {filmId: number, status: boolean}, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'data/changeFilmStatusToView',
+  async ({filmId, status}, {extra: api}) => {
+    const {data} = await api.post<Film>(`favorite/${filmId}/${status ? '1' : '0'}`);
+
+    return data;
+  },
+);
+

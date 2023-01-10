@@ -7,8 +7,14 @@ import MyList from '../../pages/my-list/my-list';
 import SignIn from '../../pages/sign-in/sign-in';
 import NotFound from '../../pages/not-found/not-found';
 import PrivateRoute from '../private-route/private-route';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {checkAuth} from '../../store/api-actions';
 
 function App(): JSX.Element {
+  const dispatch = useAppDispatch();
+  dispatch(checkAuth());
+  const isAuthorised = useAppSelector((state) => state.isAuthorised);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -19,7 +25,7 @@ function App(): JSX.Element {
           </Route>
           <Route path='player/:id' element={<Player />} />
           <Route path='mylist' element={
-            <PrivateRoute hasAccess={false}>
+            <PrivateRoute hasAccess={isAuthorised}>
               <MyList />
             </PrivateRoute>
           }

@@ -7,6 +7,8 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Loading from '../../components/loading/loading';
 import {useEffect} from 'react';
 import {fetchFilms, fetchPromoFilm} from '../../store/api-actions';
+import UserBlock from '../../components/user-block/user-block';
+import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -39,17 +41,7 @@ function Main(): JSX.Element {
 
         <header className="page-header film-card__head">
           <Logo/>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock/>
         </header>
 
         <div className="film-card__wrap">
@@ -65,21 +57,7 @@ function Main(): JSX.Element {
                 <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
-              <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-              </div>
+              <FilmCardButtons />
             </div>
           </div>
         </div>

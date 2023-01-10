@@ -4,12 +4,23 @@ import {
   changeGenre,
   increaseFilmCardsCount,
   resetFilmCardsCount,
-  filterFilmsByGenre
+  filterFilmsByGenre, setError
 } from './action';
 import {EMPTY_FILM, Film} from '../types/film';
 import {cardsPerStepCount} from './consts';
 import {Review} from '../types/review';
-import {fetchFilmById, fetchFilms, fetchPromoFilm, fetchReviewsById, fetchSimilarFilmsById} from './api-actions';
+import {
+  changeFilmViewStatus,
+  checkAuth,
+  fetchFilmById,
+  fetchFilms,
+  fetchPromoFilm,
+  fetchReviewsById,
+  fetchSimilarFilmsById,
+  login,
+  logout
+} from './api-actions';
+import {deleteToken, saveToken} from '../services/token';
 
 type InitialState = {
   allFilms: Film[],
@@ -20,7 +31,12 @@ type InitialState = {
   currentFilm: Film,
   currentFilmReviews: Review[],
   currentFilmSimilarFilms: Film[],
-  isLoading: boolean
+  favouriteFilms: Film[],
+  favouriteFilmsCount: number
+  isLoading: boolean,
+  isAuthorised: boolean,
+  avatarUrl: string,
+  error: string | null
 };
 
 const initialState : InitialState = {
@@ -32,7 +48,12 @@ const initialState : InitialState = {
   currentFilm: EMPTY_FILM,
   currentFilmReviews: [],
   currentFilmSimilarFilms: [],
-  isLoading: true
+  favouriteFilms: [],
+  favouriteFilmsCount: 0,
+  isLoading: true,
+  isAuthorised: false,
+  avatarUrl: '',
+  error: null
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -66,6 +87,7 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchPromoFilm.fulfilled, (state, action) =>{
       state.promoFilm = action.payload;
+      state.currentFilm = action.payload;
       state.isLoading = false;
     })
     .addCase(fetchReviewsById.pending, (state) =>{
@@ -88,6 +110,34 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(fetchSimilarFilmsById.fulfilled, (state, action) =>{
       state.currentFilmSimilarFilms = action.payload;
       state.isLoading = false;
+    })
+    .addCase(login.fulfilled, (state, action) =>{
+      saveToken(action.payload.token);
+      state.avatarUrl = action.payload.avatarUrl;
+      state.isAuthorised = true;
+    })
+    .addCase(logout.fulfilled, (state) => {
+      deleteToken();
+      state.avatarUrl = '';
+      state.isAuthorised = false;
+    })
+    .addCase(checkAuth.fulfilled, (state, action) => {
+      state.avatarUrl = action.payload.avatarUrl;
+      state.isAuthorised = true;
+    })
+    .addCase(checkAuth.rejected, (state) => {
+      state.isAuthorised = false;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload.error;
+    })
+    .addCase(changeFilmViewStatus.fulfilled, (state, action) => {
+      state.currentFilm = action.payload;
+      if (action.payload.isFavorite) {
+        state.favouriteFilmsCount += 1;
+      } else {
+        state.favouriteFilmsCount -= 1;
+      }
     });
 });
 
