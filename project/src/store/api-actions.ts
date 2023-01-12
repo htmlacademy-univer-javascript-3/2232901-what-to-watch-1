@@ -5,6 +5,7 @@ import {Film} from '../types/film';
 import {Review} from '../types/review';
 import {UserData} from '../types/user-data';
 import {AuthData} from '../types/auth-data';
+import {PostReviewData} from '../types/post-review-data';
 
 export const fetchFilms = createAsyncThunk<Film[], undefined, {
   dispatch: AppDispatch,
@@ -110,11 +111,22 @@ export const changeFilmViewStatus = createAsyncThunk<Film, {filmId: number, stat
   state: State,
   extra: AxiosInstance
 }>(
-  'data/changeFilmStatusToView',
+  'changeFilmViewStatus',
   async ({filmId, status}, {extra: api}) => {
     const {data} = await api.post<Film>(`favorite/${filmId}/${status ? '1' : '0'}`);
 
     return data;
+  },
+);
+
+export const postReview = createAsyncThunk<void, PostReviewData, {
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance
+}>(
+  'postReview',
+  async ({review, rating, filmId}, {dispatch, extra: api}) => {
+    await api.post(`comments/${filmId}`, {review: review, rating});
   },
 );
 

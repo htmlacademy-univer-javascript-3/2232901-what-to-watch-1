@@ -20,9 +20,15 @@ function App(): JSX.Element {
       <Routes>
         <Route path='/'>
           <Route index element={<Main />} />
-          <Route path='films/:id' element={<MoviePage />}>
-            <Route path='review' element={<AddReview />} />
-          </Route>
+          <Route path='films/:id' element={<MoviePage />} />
+          <Route
+            path='films/:id/review'
+            element={
+              <PrivateRoute hasAccess={isAuthorised}>
+                <AddReview/>
+              </PrivateRoute>
+            }
+          />
           <Route path='player/:id' element={<Player />} />
           <Route path='mylist' element={
             <PrivateRoute hasAccess={isAuthorised}>
