@@ -9,6 +9,7 @@ import Loading from '../../components/loading/loading';
 import FilmCardButtons from '../../components/film-card-buttons/film-card-buttons';
 import UserBlock from '../../components/user-block/user-block';
 import {Navigate, useParams} from 'react-router-dom';
+import {EMPTY_FILM} from '../../types/film';
 
 function MoviePage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,7 +25,7 @@ function MoviePage(): JSX.Element {
   const similarFilms = useAppSelector((state) => state.currentFilmSimilarFilms);
   const isLoading = useAppSelector((state) => state.isLoading);
 
-  if (!film) {
+  if (film === EMPTY_FILM) {
     return <Navigate to={'/not-found'}/>;
   }
 
@@ -57,7 +58,7 @@ function MoviePage(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
 
-              <FilmCardButtons />
+              <FilmCardButtons isMain={false}/>
             </div>
           </div>
         </div>
@@ -80,7 +81,7 @@ function MoviePage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <FilmsList films={similarFilms}/>
+            <FilmsList films={similarFilms.slice(0,4)}/>
           </div>
         </section>
 

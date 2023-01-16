@@ -2,7 +2,11 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeFilmViewStatus} from '../../store/api-actions';
 import {Link} from 'react-router-dom';
 
-function FilmCardButtons(): JSX.Element{
+type FilmCardButtonsProps = {
+  isMain: boolean;
+}
+
+function FilmCardButtons({isMain}: FilmCardButtonsProps): JSX.Element{
   const favoriteCount = useAppSelector((state) => state.favouriteFilmsCount);
   const dispatch = useAppDispatch();
   const film = useAppSelector((state) => state.currentFilm);
@@ -48,7 +52,7 @@ function FilmCardButtons(): JSX.Element{
           <span className="film-card__count">{favoriteCount}</span>
         </button>
       }
-      { isAuthorized &&
+      { isAuthorized && !isMain &&
         <Link to={'review'} className="btn film-card__button" type='button'>Add review</Link>}
     </div>
   );

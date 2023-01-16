@@ -1,4 +1,4 @@
-import ReviewComp from '../review-comp/review-comp';
+import ReviewCard from '../review-comp/review-card';
 import {useAppSelector} from '../../hooks';
 
 function ReviewsTab(){
@@ -7,7 +7,7 @@ function ReviewsTab(){
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.map((review) => <ReviewComp key={review.id} review={review} />)}
+        {reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
       </div>
     </div>
   );

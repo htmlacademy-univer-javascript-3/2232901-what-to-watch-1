@@ -4,7 +4,7 @@ type ReviewProps = {
   review: Review
 }
 
-function ReviewComp({review}: ReviewProps){
+function ReviewCard({review}: ReviewProps){
   return (
     <div className="review">
       <blockquote className="review__quote">
@@ -21,4 +21,4 @@ function ReviewComp({review}: ReviewProps){
   );
 }
 
-export default ReviewComp;
+export default ReviewCard;

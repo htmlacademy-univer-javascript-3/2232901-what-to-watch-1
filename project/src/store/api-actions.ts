@@ -126,7 +126,7 @@ export const postReview = createAsyncThunk<void, PostReviewData, {
 }>(
   'postReview',
   async ({review, rating, filmId}, {dispatch, extra: api}) => {
-    await api.post(`comments/${filmId}`, {review: review, rating});
+    await api.post(`comments/${filmId}`, {comment: review, rating});
   },
 );
 

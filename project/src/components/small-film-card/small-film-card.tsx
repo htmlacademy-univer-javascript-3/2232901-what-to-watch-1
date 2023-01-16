@@ -12,7 +12,13 @@ type SmallFilmCardProps = {
 
 function SmallFilmCard({ film, isMouseOn, onMouseOverHandler, onMouseLeaveHandler }: SmallFilmCardProps): JSX.Element {
   return (
-    <article className="small-film-card catalog__films-card" onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
+    <Link
+      to={`/films/${film.id}`}
+      className='small-film-card catalog__films-card small-film-card__link'
+      data-testid='film-link'
+      onMouseEnter={() => onMouseOverHandler}
+      onMouseLeave={() => onMouseLeaveHandler}
+    >
       <div className="small-film-card__image">
         {
           isMouseOn
@@ -22,9 +28,9 @@ function SmallFilmCard({ film, isMouseOn, onMouseOverHandler, onMouseLeaveHandle
         }
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
+        {film.name}
       </h3>
-    </article>
+    </Link>
   );
 }
 

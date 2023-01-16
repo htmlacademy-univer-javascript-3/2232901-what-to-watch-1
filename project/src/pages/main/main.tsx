@@ -57,7 +57,7 @@ function Main(): JSX.Element {
                 <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
-              <FilmCardButtons />
+              <FilmCardButtons isMain/>
             </div>
           </div>
         </div>

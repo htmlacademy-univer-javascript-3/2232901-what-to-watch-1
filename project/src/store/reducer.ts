@@ -7,7 +7,7 @@ import {
   filterFilmsByGenre, setError
 } from './action';
 import {EMPTY_FILM, Film} from '../types/film';
-import {cardsPerStepCount} from './consts';
+import {CARDS_PER_STEP_COUNT} from './consts';
 import {Review} from '../types/review';
 import {
   changeFilmViewStatus,
@@ -43,7 +43,7 @@ const initialState : InitialState = {
   allFilms: [],
   currentGenre: ANY_GENRE,
   filteredFilms: [],
-  filmCardsCount: cardsPerStepCount,
+  filmCardsCount: CARDS_PER_STEP_COUNT,
   promoFilm: EMPTY_FILM,
   currentFilm: EMPTY_FILM,
   currentFilmReviews: [],
@@ -63,13 +63,13 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(filterFilmsByGenre, (state, action) => {
       state.filteredFilms = getFilmsByGenre(state.allFilms, state.currentGenre);
-      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, CARDS_PER_STEP_COUNT);
     })
     .addCase(increaseFilmCardsCount, (state, action) => {
-      state.filmCardsCount = Math.min(state.filteredFilms.length, state.filmCardsCount + cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, state.filmCardsCount + CARDS_PER_STEP_COUNT);
     })
     .addCase(resetFilmCardsCount, (state, action) => {
-      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, CARDS_PER_STEP_COUNT);
     })
     .addCase(fetchFilms.pending, (state) =>{
       state.isLoading = true;
@@ -79,7 +79,7 @@ export const reducer = createReducer(initialState, (builder) => {
 
       state.allFilms = films;
       state.filteredFilms = films;
-      state.filmCardsCount = Math.min(state.filteredFilms.length, cardsPerStepCount);
+      state.filmCardsCount = Math.min(state.filteredFilms.length, CARDS_PER_STEP_COUNT);
       state.isLoading = false;
     })
     .addCase(fetchPromoFilm.pending, (state) =>{
@@ -102,6 +102,10 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(fetchFilmById.fulfilled, (state, action) =>{
       state.currentFilm = action.payload;
+      state.isLoading = false;
+    })
+    .addCase(fetchFilmById.rejected, (state, action) =>{
+      state.currentFilm = EMPTY_FILM;
       state.isLoading = false;
     })
     .addCase(fetchSimilarFilmsById.pending, (state) =>{
