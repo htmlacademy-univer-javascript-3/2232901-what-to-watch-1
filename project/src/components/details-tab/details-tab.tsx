@@ -1,4 +1,5 @@
 import {Film} from '../../types/film';
+import {Fragment} from 'react';
 
 type DetailsTabProps = {
   film: Film
@@ -15,7 +16,7 @@ function DetailsTab({film}: DetailsTabProps){
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film.starring.map((star) => <>{star}<br /></>)}
+            {film.starring.map((star) => <Fragment key={star}>{star}<br /></Fragment>)}
           </span>
         </p>
       </div>
@@ -23,7 +24,7 @@ function DetailsTab({film}: DetailsTabProps){
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.duration}</span>
+          <span className="film-card__details-value">{film.runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -31,7 +32,7 @@ function DetailsTab({film}: DetailsTabProps){
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{film.releaseYear}</span>
+          <span className="film-card__details-value">{film.released}</span>
         </p>
       </div>
     </div>

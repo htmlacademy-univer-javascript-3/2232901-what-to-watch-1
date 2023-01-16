@@ -21,7 +21,7 @@ function FilmsList({films}: FilmsListProps){
         (
           <SmallFilmCard
             film={film}
-            key={film.name}
+            key={film.id}
             isMouseOn={activeCard === film.id}
             onMouseOverHandler={() => changeActiveCard(film.id)}
             onMouseLeaveHandler={() => changeActiveCard(-1)}

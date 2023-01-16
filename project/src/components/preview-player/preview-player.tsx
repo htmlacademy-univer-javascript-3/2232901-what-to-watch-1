@@ -1,5 +1,7 @@
 import {useEffect, useRef} from 'react';
 
+const PREVIEW_TIMEOUT = 1000;
+
 type PreviewPlayerProps = {
   posterUrl: string,
   videoUrl: string
@@ -11,7 +13,7 @@ function PreviewPlayer({posterUrl, videoUrl}: PreviewPlayerProps){
   useEffect(() => {
     const delay: NodeJS.Timeout = setTimeout(
       () => videoRef.current?.play(),
-      1000);
+      PREVIEW_TIMEOUT);
     return () => clearTimeout(delay);
   });
 
